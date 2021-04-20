@@ -1,0 +1,41 @@
+\need{Inference}
+
+\begin{itemize}
+    \item Use robust standard errors, but do not cluster on the running variable if it is discrete (\cite{kolesar})!
+\end{itemize}
+
+%\divider\smallskip
+
+%\itemtag{other}
+%\itemtag{more}
+%\itemtag{used before (would do)}
+%\itemtag{twesors}
+
+
+\need{How the Pros Do It}
+\begin{itemize}
+\item See \cite{cattaneo} for ways to optimally select the bandwidth.
+\item Verify results are not sensitive to bandwidth or choice of $g(w)$.
+\item If there are characteristics that should not be changed by the treatment (e.g. pre-treatment demographics), try putting them on the left hand side and show there is no change at the cutoff.
+\item Controlling for unit characteristics may increase precision even if they do not change at the cutoff.
+\item Using polynomials higher than order 2 for $g(w)$ is generally frowned upon (\cite{gelman}). Try a local linear regression or lower order polynomial instead!
+    \end{itemize}
+
+
+
+\need{Rating}
+
+\risk{Difficulty}{3}
+\risk{Fun}{5}
+\risk{Validity}{4}
+
+
+\need{Make it Sizzle}
+\begin{itemize}
+    \item Do you observe periods before and after the cutoff rule was in place? If so, you may be able to estimate the elusive ``diff-in-diff-RD'' model!
+    \item Do this estimating $\beta_{RDD}$ using data from prior to when the cutoff was instituted, and then again after the cutoff was instituted. 
+\end{itemize}
+
+
+
+

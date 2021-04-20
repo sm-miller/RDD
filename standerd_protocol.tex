@@ -1,0 +1,130 @@
+\documentclass[10pt,a4paper]{protocol}
+\usepackage{amssymb,amsmath,amsfonts,eurosym,ulem,graphicx,caption,color,setspace,sectsty,comment,footmisc,caption,pdflscape,subfigure,array}
+
+% Change the page layout if you need to
+\geometry{left=1cm,right=9cm,marginparwidth=6.8cm,marginparsep=1.2cm,top=1cm,bottom=1cm}
+
+% Change the font if you want to.
+
+% If using pdflatex:
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[default]{lato}
+
+% If using xelatex or lualatex:
+% \setmainfont{Lato}
+
+% Change the colours if you want to
+\definecolor{Bright}{HTML}{58318f}
+\definecolor{Green}{HTML}{319866}
+\definecolor{Black}{HTML}{111111}
+\definecolor{LightGrey}{HTML}{515c50}
+
+\definecolor{main}{HTML}{00274C}
+\definecolor{background}{HTML}{EFF0F1}
+
+\definecolor{alert}{HTML}{CC6600}
+\definecolor{example}{HTML}{00274C}
+
+\colorlet{heading}{main}
+\colorlet{accent}{alert}
+\colorlet{emphasis}{main}
+\colorlet{body}{main}
+
+
+% Change the bullets for itemize and rating marker
+% for \risk if you want to
+\renewcommand{\itemmarker}{{\small\textbullet}}
+\renewcommand{\ratingmarker}{\faSpinner}
+
+%% sample.bib contains your publications
+\addbibresource{sample.bib}
+
+\begin{document}
+\name{Regression Discontinuity Design}
+\tagline{For Fun and Profit}
+\made{August 7, 2020}
+\logo{6.5cm}{"rosslogo"}
+
+
+
+\docinfo{%
+  % can add more \addedtopeople
+  \madeby{Sarah Miller}{mille@umich.edu}{for BE 887}
+%  \addedto{John Smith}{abv1@uni.ac.uk}{October 3, 2017}
+}
+
+
+%\purpose{
+%Difference-in-differences compares the change in an outcome in treated units before and after receiving the treatment to the change in the outcome in untreated units over the same time period. 
+%} % add a short discription of the purpose for this protocol
+
+
+%% Make the header extend all the way to the right, if you want.
+\begin{fullwidth}
+\makeheader
+\end{fullwidth}
+
+%% Provide the file name containing the sidebar contents as an optional parameter to \need.
+%% You can always just use \marginpar{...} if you do
+%% not need to align the top of the contents to any
+%% \need title in the "main" bar.
+In a regression discontinuity design (RDD), units are treated on one side of a threshold or cutoff and not on the other side, and the threshold is determined using a continuous ``running'' variable. Units very near the cutoff are considered similar except for their treatment status.
+
+
+\need[materials]{When to use}
+\req{1}{The probability of treatment is determined by a threshold}{}
+\begin{itemize}
+	\item It may be the case that all of the units above the threshold are treated and none of those below it are treated. In this case, you have a \textbf{sharp RDD}.
+	\item It may be the case that the probability of treatment changes discontinuously at the threshold by less than 1. In this case, you have a \textbf{fuzzy RDD}. 
+\end{itemize}
+\divider
+
+\req{2}{Units sufficiently close to the threshold only vary meaningfully in their probability of receiving treatment.}{}
+\begin{itemize}
+	\item There are no jumps at the threshold in characteristics of the units; only the probability of treatment changes discontinuously at the threshold. 
+\end{itemize}
+\divider
+
+\need[]{What to Do: The Basics}
+
+\step{1}{Plot data against running variable}{40}
+\begin{itemize}
+	\item Do you see a jump in the fraction of the sample being treated at the cutoff?
+	Do outcome variables appear to jump? What about other characteristics that should not be affected?
+\end{itemize}
+\divider
+
+\step{2}{Basic RDD}{25}
+\begin{itemize}
+    \item Say your running variable is $x$ and the cutoff is $\bar{x}$, such that units with $x_i \geq \bar{x}$ are treated (or more likely to be treated), and $x_i < \bar{x}$ are untreated. Let $Z=I(x \geq \bar{x})$ and $w_i=x_i-\bar{x}$.
+	\item Estimate a model of the form $y_{it}=\beta_0 + g(w_i) + Z_i*g(w_i)+ \beta_{RDD} Z_i + \epsilon_i $
+	\item The function $g(w_i)$ is a continuous function of the running variable. For example, if $g$ is linear, the model is $y_{it}=\beta_0 + \beta_1 (x_i - \bar{x}) + \beta_2 Z_i (x_i - \bar{x}) + \beta_{RDD} Z_i + \epsilon_i$.
+	\item The coefficient $\beta_{RDD}$ is the change in $y$ at the cutoff. In a sharp RDD, it is also the treatment effect.
+	\item If the probability of treatment increases by less than one at the cutoff, you can scale the observed change at the cutoff by that probability to arrive at the treatment effect.
+\end{itemize}
+\divider
+
+
+
+\clearpage
+
+\need[otherinfo]{Sources}
+
+\nocite{*}
+
+\printbibliography
+
+
+\divider
+
+
+%% If the NEXT page doesn't start with a \need but you'd
+%% still like to add a sidebar, then use this command on THIS
+%% page to add it. The optional argument lets you pull up the
+%% sidebar a bit so that it looks aligned with the top of the
+%% main column.
+% \addnextpagesidebar[-1ex]{page3sidebar}
+
+
+\end{document}
